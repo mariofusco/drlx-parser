@@ -22,6 +22,7 @@ import com.github.javaparser.ast.drlx.RuleBody;
 import com.github.javaparser.ast.drlx.RuleConsequence;
 import com.github.javaparser.ast.drlx.RuleDeclaration;
 import com.github.javaparser.ast.drlx.RulePattern;
+import com.github.javaparser.ast.drlx.expr.CommaSeparatedMethodCallExpr;
 import com.github.javaparser.ast.drlx.expr.DrlxExpression;
 import com.github.javaparser.ast.drlx.expr.HalfBinaryExpr;
 import com.github.javaparser.ast.drlx.expr.HalfPointFreeExpr;
@@ -72,4 +73,6 @@ public interface VoidRuleVisitor<A> {
     default void visit(BigIntegerLiteralExpr bigIntegerLiteralExpr, A arg) {}
 
     default void visit(TemporalLiteralInfiniteChunkExpr temporalLiteralInfiniteChunkExpr, A arg) { }
+
+    default void visit(CommaSeparatedMethodCallExpr commaSeparatedMethodCallExpr, A arg) {  }
 }

@@ -25,6 +25,7 @@ options {
   JDK_VERSION = "1.8";
   TOKEN_EXTENDS ="TokenBase";
   JAVA_TEMPLATE_TYPE = "modern";
+  // DEBUG_PARSER=true;
 }
 
 PARSER_BEGIN(GeneratedJavaParser)
@@ -1770,6 +1771,9 @@ Expression DrlxExpressionSwitch():
 }
 {
   (
+  LOOKAHEAD(CommaSeparatedMethodCallExpr(), { drlParsing })
+    ret = CommaSeparatedMethodCallExpr()
+  |
   LOOKAHEAD(PointFreeExprMvel(), { drlParsing })
     ret = PointFreeExprMvel()
   |
@@ -3088,6 +3092,30 @@ DrlxExpression DrlxExpression():
   )
 
   { return new DrlxExpression(decl, expr); }
+}
+
+Expression CommaSeparatedMethodCallExpr():
+{
+    JavaToken begin;
+    Expression first = null;
+    Expression other = null;
+    NodeList<Expression> all = emptyList();
+}
+{
+    (
+        (
+            first = PrimaryPrefix() { begin=token(); all.add(first); }
+            (
+                          <COMMA>
+                          other = PrimaryPrefix() { all.add(other); }
+            )*
+            <SEMICOLON>
+            {
+                return new CommaSeparatedMethodCallExpr(range(begin, token()), all);
+            }
+
+        )
+    )
 }
 
 

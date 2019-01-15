@@ -6,6 +6,7 @@ import com.github.javaparser.ast.drlx.RuleBody;
 import com.github.javaparser.ast.drlx.RuleConsequence;
 import com.github.javaparser.ast.drlx.RuleDeclaration;
 import com.github.javaparser.ast.drlx.RulePattern;
+import com.github.javaparser.ast.drlx.expr.CommaSeparatedMethodCallExpr;
 import com.github.javaparser.ast.drlx.expr.DrlxExpression;
 import com.github.javaparser.ast.drlx.expr.HalfBinaryExpr;
 import com.github.javaparser.ast.drlx.expr.HalfPointFreeExpr;
@@ -57,4 +58,6 @@ public interface GenericRuleVisitor<R, A> {
     default R visit(BigIntegerLiteralExpr bigIntegerLiteralExpr, A arg) { return null; }
 
     default R visit(TemporalLiteralInfiniteChunkExpr temporalLiteralInfiniteChunkExpr, A arg) { return null; }
+
+    default R visit(CommaSeparatedMethodCallExpr commaSeparatedMethodCallExpr, A arg) { throw new UnsupportedOperationException(); }
 }

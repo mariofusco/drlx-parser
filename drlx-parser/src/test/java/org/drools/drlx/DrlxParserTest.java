@@ -508,6 +508,14 @@ public class DrlxParserTest {
 
     }
 
+    @Test
+    public void testMethodCallWithComma() {
+        String expr = "setAge(1), setLikes(\"bread\");";
+
+        Expression expression = parseExpression(parser, expr).getExpr();
+        assertEquals("setAge(1), setLikes(\"bread\");", toDrlx(expression));
+    }
+
 
     private void testMvelSquareOperator(String wholeExpression, String operator, String left, String right, boolean isNegated) {
         String expr = wholeExpression;

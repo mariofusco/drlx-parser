@@ -18,12 +18,15 @@ package com.github.javaparser.printer;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.drlx.OOPathChunk;
 import com.github.javaparser.ast.drlx.OOPathExpr;
 import com.github.javaparser.ast.drlx.RuleBody;
 import com.github.javaparser.ast.drlx.RuleDeclaration;
+import com.github.javaparser.ast.drlx.expr.CommaSeparatedMethodCallExpr;
 import com.github.javaparser.ast.drlx.expr.DrlxExpression;
 import com.github.javaparser.ast.drlx.expr.HalfBinaryExpr;
 import com.github.javaparser.ast.drlx.expr.HalfPointFreeExpr;
@@ -269,5 +272,16 @@ public class DrlxPrintVisitor extends AbstractVoidRuleVisitor<Void, PrettyPrintV
         visitor.printer.print(bigIntegerLiteralExpr.asBigInteger().toString());
         visitor.printer.print("I");
     }
+
+    public void visit(CommaSeparatedMethodCallExpr commaSeparatedMethodCallExpr, Void arg) {
+        String expressionWithComma = commaSeparatedMethodCallExpr.getExpressions()
+                .stream()
+                .map(Node::toString)
+                .collect(Collectors.joining(", "));
+
+        visitor.printer.print(expressionWithComma);
+        visitor.printer.print(";");
+    }
+
 
 }
