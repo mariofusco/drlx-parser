@@ -137,6 +137,13 @@ public class DrlxParserTest {
     }
 
     @Test
+    public void testBigDecimalLiteral() {
+        String bigDecimalLiteralWithDecimals = "12.111B";
+        Expression bigDecimalExprWithDecimals = parseExpression( parser, bigDecimalLiteralWithDecimals ).getExpr();
+        assertEquals(bigDecimalLiteralWithDecimals, toDrlx(bigDecimalExprWithDecimals));
+    }
+
+    @Test
     public void testDotFreeExprWithOr() {
         String expr = "this after $a || this after $b";
         Expression expression = parseExpression( parser, expr ).getExpr();

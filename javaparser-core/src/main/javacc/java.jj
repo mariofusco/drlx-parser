@@ -320,7 +320,8 @@ TOKEN :
   >
 |
   < BIG_DECIMAL_LITERAL:
-        <DECIMAL_LITERAL> (["B"])
+        <DECIMAL_FLOATING_POINT_LITERAL> (["B"])
+      | <DECIMAL_LITERAL> (["B"])
   >
 |
   < #DECIMAL_LITERAL: ["0"-"9"]((["0"-"9","_"])*["0"-"9"])? >
